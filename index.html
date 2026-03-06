@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juliette's Helping Heart | BeechTree Neighborhood</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf8f2;
+      --blush: #f5cfc5;
+      --rose: #c97a6e;
+      --warm-brown: #6b3f36;
+      --gold: #d4a574;
+      --soft-gold: #f0e0cc;
+      --text: #3d2b27;
+      --muted: #9a7b74;
+      --cashapp: #00c244;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 70px 0 50px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-emblem {
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(145deg, var(--blush), var(--soft-gold));
+      border-radius: 50%;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.6rem;
+      box-shadow: 0 8px 32px rgba(201,122,110,0.25), 0 2px 8px rgba(201,122,110,0.1);
+      position: relative;
+    }
+
+    .hero-emblem::after {
+      content: '';
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 1.5px dashed var(--gold);
+      opacity: 0.6;
+      animation: spin 18s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .eyebrow {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-weight: 300;
+      color: var(--warm-brown);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-sub {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 480px;
+      margin-inline: auto;
+      line-height: 1.7;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 40px 0;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blush), transparent);
+    }
+
+    .divider-icon { color: var(--gold); font-size: 1.1rem; }
+
+    /* ── CARDS ── */
+    .card {
+      background: #fff;
+      border: 1px solid rgba(212,165,116,0.2);
+      border-radius: 24px;
+      padding: 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 20px rgba(107,63,54,0.05);
+      animation: fadeUp 0.7s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blush), var(--gold), var(--blush));
+      opacity: 0.7;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+
+    .card-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--soft-gold);
+      color: var(--warm-brown);
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--warm-brown);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    h2 em { font-style: italic; color: var(--rose); }
+
+    p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+
+    /* ── INTRO QUOTE ── */
+    .quote-card {
+      background: linear-gradient(135deg, var(--blush) 0%, var(--soft-gold) 100%);
+      border: none;
+      text-align: center;
+    }
+
+    .quote-card::before { opacity: 0; }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--rose);
+      opacity: 0.4;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .quote-card blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--warm-brown);
+      font-weight: 300;
+      line-height: 1.55;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .quote-card cite {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.8rem;
+      font-style: normal;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    /* ── SERVICES GRID ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .service-item {
+      background: var(--cream);
+      border: 1px solid rgba(212,165,116,0.25);
+      border-radius: 16px;
+      padding: 20px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .service-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .service-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--warm-brown);
+      margin-bottom: 4px;
+    }
+
+    .service-text span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── SAFETY ── */
+    .safety-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .safety-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--cream);
+      border-radius: 14px;
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .safety-list li .icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .safety-list li strong { color: var(--warm-brown); }
+
+    /* ── CALENDAR ── */
+    .cal-wrap {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(212,165,116,0.2);
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(107,63,54,0.06);
+    }
+
+    /* ── CTA ── */
+    .cta-card {
+      background: linear-gradient(150deg, var(--warm-brown) 0%, #8c524a 100%);
+      border: none;
+      text-align: center;
+      padding: 50px 36px;
+      border-radius: 28px;
+      margin-top: 32px;
+      box-shadow: 0 12px 40px rgba(107,63,54,0.3);
+    }
+
+    .cta-card::before {
+      background: linear-gradient(90deg, var(--gold), var(--blush), var(--gold));
+      opacity: 0.5;
+    }
+
+    .cta-card h2 {
+      color: var(--cream);
+      font-size: 2rem;
+    }
+
+    .cta-card p {
+      color: rgba(253,248,242,0.7);
+      margin-top: 12px;
+      max-width: 380px;
+      margin-inline: auto;
+    }
+
+    .btn-cashapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--cashapp);
+      color: white;
+      text-decoration: none;
+      padding: 16px 34px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 26px;
+      letter-spacing: 0.03em;
+      box-shadow: 0 6px 20px rgba(0,194,68,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-cashapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,194,68,0.4);
+    }
+
+    .btn-cashapp .cashapp-icon { font-size: 1.2rem; }
+
+    .cta-footnote {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: rgba(253,248,242,0.45);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── HEART ROW ── */
+    .hearts {
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--blush);
+      letter-spacing: 8px;
+      margin: 10px 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 0 20px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .card { padding: 28px 22px; }
+      .cta-card { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-emblem">🌸</div>
+      <p class="eyebrow">BeechTree's Sweetest Helper</p>
+      <h1>Meet <em>Juliette</em>,<br>your family's little light</h1>
+      <p class="hero-sub">A warm, responsible neighborhood Mother's Helper ready to bring an extra pair of caring hands — and a big heart — right to your front door.</p>
+    </header>
+
+    <!-- QUOTE / INTRO -->
+    <section class="card quote-card" style="animation-delay:0.05s">
+      <span class="quote-mark">"</span>
+      <blockquote>
+        I love making kids laugh, keeping little ones busy, and helping families breathe easier — one afternoon at a time.
+      </blockquote>
+      <cite>— Juliette, age 9 &nbsp;✨</cite>
+    </section>
+
+    <div class="divider"><span class="divider-icon">❧</span></div>
+
+    <!-- ABOUT -->
+    <section class="card">
+      <div class="card-label">👧 About Juliette</div>
+      <h2>A 4th grader who <em>genuinely loves kids</em></h2>
+      <p>
+        Juliette is a creative, patient, and energetic 9-year-old from the BeechTree community who is learning what it means to work hard and serve others. She's starting this neighborhood project with the full support and supervision of her parents — because she believes every busy family deserves a little extra help.
+      </p>
+      <p style="margin-top: 12px;">
+        Whether it's arts &amp; crafts, imaginative play, or simply being a calm and gentle presence with little ones, Juliette shows up with joy.
+      </p>
+    </section>
+
+    <!-- WHAT SHE DOES -->
+    <section class="card">
+      <div class="card-label">✨ What She Offers</div>
+      <h2>Your <em>extra set of hands</em> at home</h2>
+      <p>A Mother's Helper works <strong style="color:var(--warm-brown)">only while a parent or guardian is present</strong> — giving you the freedom to cook, work, or simply exhale, knowing little ones are in good hands nearby.</p>
+
+      <div class="services-grid">
+        <div class="service-item">
+          <span class="service-icon">🎨</span>
+          <div class="service-text">
+            <strong>Creative Play</strong>
+            <span>Crafts, drawing, storytelling & imaginative games</span>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">📚</span>
+          <div class="service-text">
+            <strong>Reading Time</strong>
+            <span>Read-alouds, picture books & quiet learning play</span>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">🌿</span>
+          <div class="service-text">
+            <strong>Backyard Play</strong>
+            <span>Supervised outdoor time while you get things done</span>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">🧸</span>
+          <div class="service-text">
+            <strong>Toddler Companion</strong>
+            <span>Gentle, attentive play partner for younger kiddos</span>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">🧹</span>
+          <div class="service-text">
+            <strong>Tidy Up Help</strong>
+            <span>Toy room organization & light tidying with the kids</span>
+          </div>
+        </div>
+        <div class="service-item">
+          <span class="service-icon">💛</span>
+          <div class="service-text">
+            <strong>Big Sister Energy</strong>
+            <span>Kind, nurturing presence for only children &amp; younger siblings</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAFETY -->
+    <section class="card">
+      <div class="card-label">🛡️ Safety & Ground Rules</div>
+      <h2>Peace of mind, <em>always included</em></h2>
+      <p>We know trust is everything. Here's exactly what you can expect — no surprises, no grey areas.</p>
+
+      <ul class="safety-list">
+        <li>
+          <span class="icon">🏡</span>
+          <div><strong>Parent Always Present.</strong> Juliette is a helper, not a babysitter. A parent or guardian must be home during every session — no exceptions.</div>
+        </li>
+        <li>
+          <span class="icon">🚫</span>
+          <div><strong>No Diapering or Bath Time.</strong> Juliette focuses on play and companionship — personal care tasks are handled by you.</div>
+        </li>
+        <li>
+          <span class="icon">📲</span>
+          <div><strong>Parent-Managed Communication.</strong> All scheduling and payments are coordinated through Juliette's parents — not directly with her.</div>
+        </li>
+        <li>
+          <span class="icon">🌟</span>
+          <div><strong>A Learning Experience.</strong> This project is part of Juliette's journey in developing work ethic, responsibility, and a servant's heart. Your kindness supports that growth.</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="card">
+      <div class="card-label">📅 Book a Session</div>
+      <h2>Find a time that <em>works for your family</em></h2>
+      <p>We're generally available on weekends and select weekday evenings. Pick a slot that fits your schedule below — we'd love to meet you!</p>
+      <div class="cal-wrap">
+        <iframe
+          src="https://calendar.google.com/calendar/appointments/schedules/YOUR_ID_HERE?gv=true"
+          style="border:0"
+          width="100%"
+          height="480"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-card">
+      <div class="hearts">♡ ♡ ♡</div>
+      <h2>Support Juliette's <em style="color:var(--gold)">journey</em></h2>
+      <p>This is a learning project, full of heart. If Juliette brightens your afternoon, your support goes straight toward her savings goals — managed entirely by her parents.</p>
+      <a href="https://cash.app/$YourTag" class="btn-cashapp">
+        <span class="cashapp-icon">💚</span> Support via Cash App
+      </a>
+      <p class="cta-footnote">Account managed by Juliette's parents · All contributions voluntary</p>
+    </section>
+
+    <footer>
+      <p>Made with love by The [Last Name] Family &nbsp;·&nbsp; BeechTree, Upper Marlboro &nbsp;·&nbsp; 2026</p>
+    </footer>
+
+  </div>
+</body>
+</html>
